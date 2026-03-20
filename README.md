@@ -1,6 +1,6 @@
-# carwatch 🚗
+# Car_Health_Monitoring_system 
 
-> A real-time car health monitoring system built in C using multi-process architecture, POSIX threads, and System V / POSIX IPC mechanisms.
+> A real-time car health monitoring system built in C using multi-process architecture, POSIX threads, and System V / POSIX IPC mechanisms ,Signals ,Process Control.
 
 ![Platform](https://img.shields.io/badge/platform-Linux-blue)
 ![Language](https://img.shields.io/badge/language-C-lightgrey)
@@ -25,33 +25,12 @@ It is a complete Linux systems programming project demonstrating:
 
 ---
 
-## Architecture
+# Architecture
 
-```
-                        ┌─────────────────────┐
-                        │     Supervisor       │
-                        │      (main.c)        │
-                        │  Signal handlers     │
-                        │  alarm(10s) health   │
-                        └──────────┬──────────┘
-                fork() + execv()   │
-          ┌────────────┬───────────┼──────────────┐
-          ▼            ▼           ▼              ▼
-   ┌─────────────┐ ┌──────────┐ ┌──────────┐ ┌────────┐
-   │   Sensor    │ │  Data    │ │ Decision │ │ Logger │
-   │   Manager   │ │Aggregator│ │  Engine  │ │        │
-   └──────┬──────┘ └────┬─────┘ └────┬─────┘ └───┬────┘
-          │              │            │             │
-   3 pthreads       Shared Mem   Msg Queue      Pipe
-   ┌───┬───┬───┐   + Semaphore   (msgrcv)     (fgets)
-   │ P │ A │ O │
-   └───┴───┴───┘
-  Pressure Alignment Oil
-```
+<img width="1440" height="1736" alt="image" src="https://github.com/user-attachments/assets/59dbb611-d7e7-40f4-a4f7-5f471d759486" />
 
----
 
-## Project Structure
+# Project Structure
 
 ```
 carwatch/
@@ -80,7 +59,7 @@ carwatch/
 
 ---
 
-## IPC Mechanisms Used
+# IPC Mechanisms Used
 
 | Mechanism | Key / Name | Purpose |
 |---|---|---|
@@ -140,7 +119,7 @@ carwatch/
 
 ---
 
-## Requirements
+# Requirements
 
 - Linux (Ubuntu 20.04+ recommended)
 - GCC with pthread support
@@ -153,7 +132,7 @@ sudo apt install gcc make
 
 ---
 
-## Build & Run
+# Build & Run
 
 ```bash
 # Clone the repo
@@ -172,7 +151,7 @@ make clean
 
 ---
 
-## Expected Output
+# Expected Output
 
 ```
 Smart Car Service Monitoring System started (pid=15717)
@@ -205,7 +184,7 @@ Press Ctrl+C to stop. Snapshot every 5s.
 
 ---
 
-## Live Log
+# Live Log
 
 All alerts are timestamped and written to `logs/car_log.txt`.
 
@@ -221,7 +200,7 @@ tail -f logs/car_log.txt
 
 ---
 
-## Useful Commands
+# Useful Commands
 
 ```bash
 # Print snapshot of all process PIDs
@@ -240,7 +219,7 @@ ipcrm -Q 0x5678
 
 ---
 
-## Key Implementation Rules
+# Key Implementation Rules
 
 1. `setup_signal_handlers()` is called **once** in the supervisor **before** any `fork()`
 2. Every child binary starts with `alarm(0); signal(SIGALRM, SIG_DFL);` to cancel the inherited alarm
@@ -252,7 +231,7 @@ ipcrm -Q 0x5678
 
 ---
 
-## Author
+# Author
 
 **Atharva Bobade**
 B.Tech Electronics & Telecommunication Engineering
@@ -260,6 +239,6 @@ Embedded Systems & Linux Programming
 
 ---
 
-## License
+# License
 
 MIT License — free to use, modify, and distribute.
